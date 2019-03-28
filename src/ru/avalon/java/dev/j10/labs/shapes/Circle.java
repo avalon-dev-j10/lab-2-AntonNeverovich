@@ -16,29 +16,42 @@ public class Circle implements Ellipse {
      * 2. Реализуйте все абстрактные методы.
      */
     
-    private float area = (float) (Math.random() * 10 + 1);
     public static int count; // Счетчик количества объектов класса Circle
 
-    public Circle() { count++; }
+    /**
+     * Построение окружности через две случайные точки пространства float Две
+     * точки формируют радиус, который определяет каждую окружность
+     */
+    // Точка А(x1, y1)
+    private final float x1, y1;
+    // Точка B(x1, y1)
+    private final float x2, y2;
+    
+    public Circle() { 
+        this.x1 = Point.getX();
+        this.y1 = Point.getX();
+        this.x2 = Point.getX();
+        this.y2 = Point.getY();
+        count++; }
 
     public Shape Circle() {
         return new Circle();
     }
-
+        
     @Override
     public float getArea() {
-        return this.area;
+        return (float)Math.PI * (float)(Math.pow(this.getRadius(), 2));
     }
 
     @Override
     public float getLength() {
-        return 0f;
+        return (float)(2 * Math.PI * this.getRadius());
     }
 
     @Override
     public float getRadius() {
-        return 0f;
+        return (float)(Math.sqrt((float)(Math.pow(x2 - x1, 2)) 
+                + (float)(Math.pow(y2 - y1, 2))));
     }
-    
-    
+        
 }

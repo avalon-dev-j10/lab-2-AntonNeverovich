@@ -22,10 +22,45 @@ public class Triangle implements Polygon {
      * 2. Реализуйте все абстрактные методы.
      */
     
-    private float area = (float) (Math.random() * 10 + 1);
-    public static int count; // Счетчик количества объектов класса Circle
-
-    public Triangle() { count++; }
+    public static int count; // Счетчик количества объектов класса Triangle
+    
+    /**
+     * Построение треугольника через три случайные точки пространства float. 
+     * <p>
+     * Точки формируют стороны трегульника
+     */
+    // Точка А(x1, y1)
+    private final float x1, y1;
+    // Точка В(x2, y2)
+    private final float x2, y2;
+    // Точка С(x3, y3)
+    private final float x3, y3;
+    
+    /**
+     * Создаем линии треугольника.
+     * <p>
+     * Важно, чтобы линии замкнулись в фигуру, для этого должны сопасть
+     * координаты начала первной линии и конца последней.
+     */
+    // Линия АВ
+    private final float lineAB;
+    // Линия ВС
+    private final float lineBC;
+    // Линия СА
+    private final float lineCA;
+    
+    public Triangle() {
+        this.x1 = Point.getX();
+        this.y1 = Point.getY();
+        this.x2 = Point.getX();
+        this.y2 = Point.getY();
+        this.x3 = Point.getX();
+        this.y3 = Point.getY();
+        this.lineAB = (float)(Math.sqrt((Math.pow(x2 - x1, 2)) + (Math.pow(y2 - y1, 2))));
+        this.lineBC = (float)(Math.sqrt((Math.pow(x3 - x2, 2)) + (Math.pow(y3 - y2, 2))));
+        this.lineCA = (float)(Math.sqrt((Math.pow(x1 - x3, 2)) + (Math.pow(y1 - y3, 2))));
+        count++;
+    }
 
     public Shape Triangle() {
         return new Triangle();
@@ -33,12 +68,15 @@ public class Triangle implements Polygon {
 
     @Override
     public float getArea() {
-        return this.area;
+        return (float)(Math.sqrt((this.getPerimeter() / 2) 
+                * ((this.getPerimeter() / 2) - lineAB) 
+                * ((this.getPerimeter() / 2) - lineBC) 
+                * ((this.getPerimeter() / 2) - lineCA)));
     }
 
     @Override
     public float getPerimeter() {
-        return 0f;
+        return lineAB + lineBC + lineCA;
     }
     
     
